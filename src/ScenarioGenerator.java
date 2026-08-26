@@ -28,6 +28,26 @@ public Submission nextUpload(int i) {
             clockMs, 1, accommodation[i]);
 }
 
+    public Submission[] generateUploadEvents() {
+        Submission[] events = new Submission[2500];
+        for (int i = 0; i < 2500; i++) {
+            if (i == 1000) {
+                clockMs = Math.max(clockMs, WINDOW_OPENS_MS + 3_600_000L);
+            } else if (i == 2000) {
+                clockMs = Math.max(clockMs, 86_220_000L);
+            }
+
+            int studentIndex;
+            if (i > 0 && rng.nextInt(100) < 10) {
+                studentIndex = rng.nextInt(STUDENT_COUNT);
+            } else {
+                studentIndex = i % STUDENT_COUNT;
+            }
+            events[i] = nextUpload(studentIndex);
+        }
+        return events;
+    }
+
     public static void main(String[] args) {
         ScenarioGenerator gen = new ScenarioGenerator(20260725L);
         for (int i = 0; i < 5; i++) {
