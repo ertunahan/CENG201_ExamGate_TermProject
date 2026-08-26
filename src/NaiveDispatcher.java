@@ -21,7 +21,7 @@ public class NaiveDispatcher {
 
         int i = size - 1;
         // yeni gelen s, i'den daha yüksek öncelikliyse, i'yi sağa kaydır
-        while (i >= 0 && isHigherPriority(s, queue[i])) {
+        while (i >= 0 && isHigherPriority(queue[i], s)) {
             queue[i + 1] = queue[i];
             i--;
         }
