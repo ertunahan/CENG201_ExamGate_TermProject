@@ -14,9 +14,10 @@ public class SubmissionRegistry {
     private Node[] table;
     private int size;
     private static final double LOAD_FACTOR_THRESHOLD = 0.75;
+    private int tableSize = 16;
 
     public SubmissionRegistry() {
-        this.table = new Node[16];
+        this.table = new Node[tableSize];
         this.size = 0;
     }
 
@@ -79,7 +80,9 @@ public class SubmissionRegistry {
 
     private void resize() {
         Node[] oldTable = table;
-        table = new Node[oldTable.length * 2];
+        tableSize = oldTable.length * 2;
+
+        table = new Node[tableSize];
         size = 0;
 
         for (Node node : oldTable) { //tablodaki verileri tekrar yeni kapasitedeki tabloya ekliyoruz
